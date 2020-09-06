@@ -53,7 +53,7 @@ class ParticleFactory {
 
     private fun initParticle(p: Particle) {
         p.position = currentPosition
-        p.velocity = Pair(Random.nextInt(-9, 0), Random.nextInt(-6, 6))
+        p.velocity = Pair(Random.nextInt(-9, 0), Random.nextInt(-8, 8))
         p.ttl = Random.nextInt(400, 700)
     }
 }
