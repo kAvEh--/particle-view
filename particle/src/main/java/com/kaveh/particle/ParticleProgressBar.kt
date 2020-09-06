@@ -22,9 +22,10 @@ class ParticleProgressBar @JvmOverloads constructor(
     private val mPaintParticle = Paint()
     private val mPaintProgress = Paint()
     private var sideMargin = 100
-    private var mIndicatorRadius = 26F
+    var mIndicatorRadius = 36F
     private var isTouched = false
-    private var mProgressColor = Color.parseColor("#6200EE")
+    var mProgressColor = Color.parseColor("#03DAC5")
+    var mParticleColor = Color.parseColor("#000000")
 
     /**
      * @param progress:Float Should be 0 ~ 1.
@@ -39,6 +40,15 @@ class ParticleProgressBar @JvmOverloads constructor(
             }
         }
 
+    fun setVelocity(minX: Int, maxX: Int, minY: Int, maxY: Int) {
+        factory.minVelocity = Pair(minX, minY)
+        factory.maxVelocity = Pair(maxX, maxY)
+    }
+
+    fun setLifeTime(minTTL: Int, maxTTL: Int) {
+        factory.ttlRange = Pair(minTTL, maxTTL)
+    }
+
     init {
         val mainHandler = Handler(Looper.getMainLooper())
 
@@ -49,10 +59,10 @@ class ParticleProgressBar @JvmOverloads constructor(
                 invalidate()
             }
         })
-        println(this.willNotDraw())
         mPaintParticle.style = Paint.Style.FILL
         mPaintParticle.strokeCap = Paint.Cap.ROUND
         mPaintParticle.isAntiAlias = true
+        mPaintParticle.color = mParticleColor
 
         mPaintProgress.style = Paint.Style.STROKE
         mPaintProgress.strokeWidth = 15.0F
@@ -64,19 +74,13 @@ class ParticleProgressBar @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         mIndicatorRadius = height * .5F
+        factory.currentPosition =
+            Pair(((width - 2 * sideMargin) * progress + sideMargin).toInt(), height / 2)
 
         invalidate()
     }
 
     override fun onDraw(canvas: Canvas) {
-        for (p in factory.particles) {
-            mPaintParticle.color = Color.argb((p.opacity * 255).toInt(), 200, 100, 150)
-            canvas.drawCircle(
-                p.position.first.toFloat(),
-                p.position.second.toFloat(),
-                10f, mPaintParticle
-            )
-        }
         canvas.drawLine(
             factory.currentPosition.first.toFloat(),
             factory.currentPosition.second.toFloat(),
@@ -84,6 +88,14 @@ class ParticleProgressBar @JvmOverloads constructor(
             factory.currentPosition.second.toFloat(),
             mPaintProgress
         )
+        for (p in factory.particles) {
+            mPaintParticle.alpha = (p.opacity * 255).toInt()
+            canvas.drawCircle(
+                p.position.first.toFloat(),
+                p.position.second.toFloat(),
+                10f, mPaintParticle
+            )
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -136,7 +148,7 @@ class ParticleProgressBar @JvmOverloads constructor(
             this, "progress", tmp, newProgress
         )
         moveAnim.repeatCount = 0
-        moveAnim.duration = 80
+        moveAnim.duration = 800
         moveAnim.interpolator = AccelerateInterpolator()
         moveAnim.start()
     }

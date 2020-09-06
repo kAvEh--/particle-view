@@ -5,6 +5,9 @@ import kotlin.random.Random
 class ParticleFactory {
 
     val particles: MutableList<Particle> = mutableListOf()
+    var minVelocity = Pair(-10, -10)
+    var maxVelocity = Pair(10, 10)
+    var ttlRange = Pair(400, 700)
     var maxParticles = 0
         set(value) {
             if (value in 1..100) {
@@ -38,7 +41,8 @@ class ParticleFactory {
                 particles.removeAt(p)
                 continue
             }
-            particles[p].opacity = 1 - (currentTime - particles[p].creationTime) / particles[p].ttl.toFloat()
+            particles[p].opacity =
+                1 - (currentTime - particles[p].creationTime) / particles[p].ttl.toFloat()
             particles[p].position = Pair(
                 particles[p].position.first + particles[p].velocity.first,
                 particles[p].position.second + particles[p].velocity.second
@@ -53,7 +57,10 @@ class ParticleFactory {
 
     private fun initParticle(p: Particle) {
         p.position = currentPosition
-        p.velocity = Pair(Random.nextInt(-9, 0), Random.nextInt(-8, 8))
-        p.ttl = Random.nextInt(400, 700)
+        p.velocity = Pair(
+            Random.nextInt(minVelocity.first, maxVelocity.first),
+            Random.nextInt(minVelocity.second, maxVelocity.second)
+        )
+        p.ttl = Random.nextInt(ttlRange.first, ttlRange.second)
     }
 }

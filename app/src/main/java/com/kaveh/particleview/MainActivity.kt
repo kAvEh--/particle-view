@@ -12,5 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         particlePB.factory.maxParticles = 35
+        particlePB.setVelocity(-20,0,-10,10)
+        particlePB.setLifeTime(300, 800)
     }
 }
