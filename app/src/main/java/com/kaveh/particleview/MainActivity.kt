@@ -11,6 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        particlePB.factory.maxParticles = 1
+        particlePB.factory.maxParticles = 35
     }
 }

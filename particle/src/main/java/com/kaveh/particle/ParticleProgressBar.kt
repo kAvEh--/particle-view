@@ -4,12 +4,10 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.View
-import androidx.annotation.RequiresApi
 
 class ParticleProgressBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -44,7 +42,7 @@ class ParticleProgressBar @JvmOverloads constructor(
             canvas.drawCircle(
                 p.position.first.toFloat(),
                 p.position.second.toFloat(),
-                25f, mPaintParticle
+                10f, mPaintParticle
             )
         }
     }

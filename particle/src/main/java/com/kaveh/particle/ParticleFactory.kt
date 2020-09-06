@@ -1,17 +1,10 @@
 package com.kaveh.particle
 
-import android.os.Handler
-import android.os.Looper
+import kotlin.random.Random
 
 class ParticleFactory {
 
     val particles: MutableList<Particle> = mutableListOf()
-    var ttl = 1000
-        set(value) {
-            if (value in 10..1000) {
-                field = value
-            }
-        }
     var maxParticles = 0
         set(value) {
             if (value in 1..100) {
@@ -20,8 +13,7 @@ class ParticleFactory {
                 for (i in 0 until maxParticles) {
                     val tmp = Particle()
                     //TODO set initial particle parameters
-                    tmp.position = currentPosition
-                    tmp.velocity = Pair(1F,1F)
+                    initParticle(tmp)
                     particles.add(tmp)
                 }
             }
@@ -33,7 +25,7 @@ class ParticleFactory {
             }
         }
 
-    var currentPosition = Pair(100,100)
+    var currentPosition = Pair(100, 100)
         set(value) {
             if (value.first >= 0 && value.second >= 0)
                 field = value
@@ -42,18 +34,26 @@ class ParticleFactory {
     fun refreshStat() {
         val currentTime = System.currentTimeMillis()
         for (p in particles.size - 1 downTo 0) {
-            if (currentTime > particles[p].creationTime + ttl) {
+            if (currentTime > particles[p].creationTime + particles[p].ttl) {
                 particles.removeAt(p)
                 continue
             }
-            particles[p].opacity = 1 - (currentTime - particles[p].creationTime) / ttl.toFloat()
+            particles[p].opacity = 1 - (currentTime - particles[p].creationTime) / particles[p].ttl.toFloat()
+            particles[p].position = Pair(
+                particles[p].position.first + particles[p].velocity.first,
+                particles[p].position.second + particles[p].velocity.second
+            )
         }
         for (i in 0 until maxParticles - particles.size) {
             val tmp = Particle()
-            //TODO set particle parameters
-            tmp.position = currentPosition
-            tmp.velocity = Pair(1F,1F)
+            initParticle(tmp)
             particles.add(tmp)
         }
+    }
+
+    private fun initParticle(p: Particle) {
+        p.position = currentPosition
+        p.velocity = Pair(Random.nextInt(-9, 0), Random.nextInt(-6, 6))
+        p.ttl = Random.nextInt(400, 700)
     }
 }
