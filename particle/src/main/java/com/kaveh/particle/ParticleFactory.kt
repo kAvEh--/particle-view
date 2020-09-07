@@ -4,13 +4,13 @@ import kotlin.random.Random
 
 class ParticleFactory {
 
-    val particles: MutableList<Particle> = mutableListOf()
-    var minVelocity = Pair(-10, -10)
-    var maxVelocity = Pair(10, 10)
-    var ttlRange = Pair(400, 700)
-    var maxParticles = 0
+    internal var particles: MutableList<Particle> = mutableListOf()
+    internal var minVelocity = Pair(-10, -10)
+    internal var maxVelocity = Pair(10, 10)
+    internal var ttlRange = Pair(400, 700)
+    internal var maxParticles = 0
         set(value) {
-            if (value in 1..100) {
+            if (value in 1..800) {
                 field = value
                 particles.clear()
                 for (i in 0 until maxParticles) {
@@ -21,14 +21,14 @@ class ParticleFactory {
                 }
             }
         }
-    var refreshRate = 100L
+    internal var refreshRate = 100L
         set(value) {
             if (value in 200..1000) {
                 field = value
             }
         }
 
-    var currentPosition = Pair(100, 100)
+    internal var currentPosition = Pair(100, 100)
         set(value) {
             if (value.first >= 0 && value.second >= 0)
                 field = value

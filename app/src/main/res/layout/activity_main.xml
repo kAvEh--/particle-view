@@ -13,4 +13,16 @@
         android:layout_marginTop="50dp"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.kaveh.particle.ParticleView
+        android:id="@+id/particleView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.kaveh.particle.ParticleView
+        android:id="@+id/particleView2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
