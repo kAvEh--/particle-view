@@ -41,11 +41,13 @@ class ParticleProgressBar @JvmOverloads constructor(
         }
 
     fun setVelocity(minX: Int, maxX: Int, minY: Int, maxY: Int) {
+        //TODO validate input
         factory.minVelocity = Pair(minX, minY)
         factory.maxVelocity = Pair(maxX, maxY)
     }
 
     fun setLifeTime(minTTL: Int, maxTTL: Int) {
+        //TODO validate input
         factory.ttlRange = Pair(minTTL, maxTTL)
     }
 
