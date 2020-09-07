@@ -8,9 +8,10 @@ class ParticleFactory {
     internal var minVelocity = Pair(-10, -10)
     internal var maxVelocity = Pair(10, 10)
     internal var ttlRange = Pair(400, 700)
+    internal var isChaos = false
     internal var maxParticles = 0
         set(value) {
-            if (value in 1..800) {
+            if (value in 1..5000) {
                 field = value
                 particles.clear()
                 for (i in 0 until maxParticles) {
@@ -43,10 +44,18 @@ class ParticleFactory {
             }
             particles[p].opacity =
                 1 - (currentTime - particles[p].creationTime) / particles[p].ttl.toFloat()
-            particles[p].position = Pair(
-                particles[p].position.first + particles[p].velocity.first,
-                particles[p].position.second + particles[p].velocity.second
-            )
+            if (isChaos)
+                particles[p].position = Pair(
+                    particles[p].position.first + particles[p].velocity.first,
+                    particles[p].position.second + particles[p].velocity.second
+                )
+            else
+                particles[p].position = Pair(
+                    particles[p].position.first +
+                            (particles[p].velocity.first *
+                                    (particles[p].velocity.second / (maxVelocity.second - minVelocity.second).toFloat())).toInt(),
+                    particles[p].position.second + particles[p].velocity.second
+                )
         }
         for (i in 0 until maxParticles - particles.size) {
             val tmp = Particle()

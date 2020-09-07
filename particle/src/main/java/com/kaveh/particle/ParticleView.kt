@@ -54,6 +54,8 @@ class ParticleView @JvmOverloads constructor(
         mPaintParticle.strokeCap = Paint.Cap.ROUND
         mPaintParticle.isAntiAlias = true
         mPaintParticle.color = particleColor
+
+        factory.isChaos = false
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {

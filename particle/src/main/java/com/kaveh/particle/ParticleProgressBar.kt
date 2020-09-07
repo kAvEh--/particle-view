@@ -83,6 +83,8 @@ class ParticleProgressBar @JvmOverloads constructor(
         mPaintProgress.strokeCap = Paint.Cap.ROUND
         mPaintProgress.isAntiAlias = true
         mPaintProgress.color = mProgressColor
+
+        factory.isChaos = true
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
