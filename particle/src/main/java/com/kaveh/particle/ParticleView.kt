@@ -1,7 +1,5 @@
 package com.kaveh.particle
 
-import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -9,10 +7,7 @@ import android.graphics.Paint
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
-import android.view.MotionEvent
 import android.view.View
-import android.view.animation.AccelerateInterpolator
-import kotlin.math.abs
 
 class ParticleView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -20,15 +15,14 @@ class ParticleView @JvmOverloads constructor(
 
     private val factory = ParticleFactory()
     private val mPaintParticle = Paint()
-    private var mParticleColor = Color.parseColor("#000000")
+    var particleColor = Color.parseColor("#000000")
+        set(value) {
+            field = value
+            mPaintParticle.color = particleColor
+        }
 
     fun setParticleOrigin(posX: Int, posY: Int) {
         factory.currentPosition = Pair(posX, posY)
-    }
-
-    fun setParticleColor(color: Int) {
-        mParticleColor = color
-        mPaintParticle.color = mParticleColor
     }
 
     fun setParticlesNum(num: Int) {
@@ -59,7 +53,7 @@ class ParticleView @JvmOverloads constructor(
         mPaintParticle.style = Paint.Style.FILL
         mPaintParticle.strokeCap = Paint.Cap.ROUND
         mPaintParticle.isAntiAlias = true
-        mPaintParticle.color = mParticleColor
+        mPaintParticle.color = particleColor
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {

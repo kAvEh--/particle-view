@@ -16,11 +16,11 @@ class MainActivity : AppCompatActivity() {
 
         particleView.setParticlesNum(335)
         particleView.setLifeTime(300, 800)
-        particleView.setParticleColor(Color.parseColor("#153131"))
+        particleView.particleColor = Color.parseColor("#d00000")
 
         particleView2.setParticlesNum(335)
         particleView2.setLifeTime(300, 800)
-        particleView2.setParticleColor(Color.parseColor("#153131"))
+        particleView2.particleColor = Color.parseColor("#a11d33")
 
         particleView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             particleView.setParticleOrigin(particleView.width / 5, particleView.height)

@@ -24,8 +24,16 @@ class ParticleProgressBar @JvmOverloads constructor(
     private var sideMargin = 100
     var mIndicatorRadius = 36F
     private var isTouched = false
-    var mProgressColor = Color.parseColor("#03DAC5")
-    var mParticleColor = Color.parseColor("#000000")
+    var mProgressColor = Color.parseColor("#00509d")
+        set(value) {
+            field = value
+            mPaintProgress.color = mProgressColor
+        }
+    var mParticleColor = Color.parseColor("#fdc500")
+        set(value) {
+            field = value
+            mPaintParticle.color = mParticleColor
+        }
 
     /**
      * @param progress:Float Should be 0 ~ 1.
