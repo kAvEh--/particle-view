@@ -6,6 +6,8 @@
 
 Android library for drawing particles.
 
+[<img src="screenshot/particle.gif" width="250" />]()
+
 ## Usage
 
 1. Add it in your root build.gradle at the end of repositories:
