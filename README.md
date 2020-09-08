@@ -1,10 +1,10 @@
-# particle-view
+# particle animation
 
 [![platform](https://img.shields.io/badge/platform-Android-green.svg)](https://www.android.com)
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![](https://jitpack.io/v/kAvEh--/particle-view.svg)](https://jitpack.io/#kAvEh--/particle-view)
 
-Android library for drawing particles.
+Android library for drawing particles and particle progress bar.
 
 [<img src="screenshot/particle.gif" width="250" />]()
 
@@ -24,6 +24,22 @@ allprojects {
 dependencies {
         implementation 'com.github.kAvEh--:particle-view:Tag'
 }
+```
+
+### Particle Progress Bar
+1. Insert `ParticleProgressBar` widget in your layout.
+```xml
+<com.kaveh.particle.ParticleProgressBar
+        android:id="@+id/particlePB"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent" />
+```
+2. For customization:
+```kotlin
+        particlePB.setParticlesNum(35) // change number of active particle
+        particlePB.setVelocity(minX, maxX, minY, maxY) // change direction of particle. Random between min and max
+        particlePB.setLifeTime(300, 800) // change life time of particle
 ```
 
 ## Requirements
