@@ -26,6 +26,24 @@ dependencies {
 }
 ```
 
+### Particle Fountain
+1. Insert `ParticleView` widget in your layout.
+```xml
+<com.kaveh.particle.ParticleView
+        android:id="@+id/particleView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+```
+2. For customization:
+```kotlin
+particleView.setParticleOrigin(particleView.width / 5, particleView.height) // change origin point of particles
+particleView.setVelocity(minX, maxX, minY, maxY)  // change direction of particle. Random between min and max
+particleView.setParticlesNum(835) // change number of active particle
+particleView.setLifeTime(300, 800) // change life time of particle
+particleView.particleColor = Color.parseColor("#a11d33") // change color of particles
+```
+
 ### Particle Progress Bar
 1. Insert `ParticleProgressBar` widget in your layout.
 ```xml
@@ -37,9 +55,9 @@ dependencies {
 ```
 2. For customization:
 ```kotlin
-        particlePB.setParticlesNum(35) // change number of active particle
-        particlePB.setVelocity(minX, maxX, minY, maxY) // change direction of particle. Random between min and max
-        particlePB.setLifeTime(300, 800) // change life time of particle
+particlePB.setParticlesNum(35) // change number of active particle
+particlePB.setVelocity(minX, maxX, minY, maxY) // change direction of particle. Random between min and max
+particlePB.setLifeTime(300, 800) // change life time of particle
 ```
 
 ## Requirements
